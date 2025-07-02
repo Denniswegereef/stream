@@ -1,19 +1,72 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: url('./assets/AirbnbCereal_W_Lt.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('./assets/AirbnbCereal_W_Bk.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('./assets/AirbnbCereal_W_Bd.woff2') format('woff2');
+}
 
 @theme {
   --color-*: initial; /* This disables ALL default colors */
   --text-*: initial; /* This disables ALL default text */
+
+  --font-family-body: 'AirbnbCereal', 'sans-serif';
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-primary: #ff385c;
+  --color-hof: #222222;
+  --color-foggy: #6a6a6a;
+  --color-bobo: #b0b0b0;
+
+  --text-large: 56px;
+  --text-large--line-height: 1.11;
+  --text-large--letter-spacing: -0.03em;
+  --text-large--font-weight: var(--font-weight-bold);
+
+  --text-medium: clamp(2.5rem, 1.795vw + 2.174rem, 4.5rem);
+  --text-medium--line-height: 1.2;
+  --text-medium--font-weight: var(--font-weight-medium);
+
+  --text-small: clamp(1.5rem, 1.093vw + 1.446rem, 2.5rem);
+  --text-small--line-height: 1.2;
+  --text-small--font-weight: var(--font-weight-normal);
+
+  /* --input-background: linear-gradient(
+    to var(--input_bgDirection),
+    var(--input_backgroundFilledColor, var(--linaria-theme_palette-hof)) 0,
+    var(--input_backgroundFilledColor, var(--linaria-theme_palette-hof))
+      var(--input_progressPercentage),
+    var(--input_backgroundEmptyColor, var(--linaria-theme_palette-bobo))
+      var(--input_progressPercentage),
+    var(--input_backgroundEmptyColor, var(--linaria-theme_palette-bobo)) 0
+  ); */
+}
+
+@utility link-default {
+  @apply underline;
 }
 
 @layer base {
-  @layer base {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: var(--font-family-heading);
-    }
+  body {
+    font-family: var(--font-family-body);
   }
 }
