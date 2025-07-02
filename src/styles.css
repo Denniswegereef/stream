@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial; /* This disables ALL default colors */
+  --text-*: initial; /* This disables ALL default text */
+}
+
+@layer base {
+  @layer base {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-family-heading);
+    }
+  }
+}
