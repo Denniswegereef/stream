@@ -1,20 +1,20 @@
-import js from "@eslint/js";
-import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
-import { globalIgnores } from "eslint/config";
-import importPlugin from "eslint-plugin-import";
-import perfectionist from "eslint-plugin-perfectionist";
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { globalIgnores } from 'eslint/config'
+import importPlugin from 'eslint-plugin-import'
+import perfectionist from 'eslint-plugin-perfectionist'
 
 export default tseslint.config([
-  globalIgnores(["dist"]),
+  globalIgnores(['dist']),
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      reactHooks.configs["recommended-latest"],
+      reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
     ],
     plugins: {
@@ -30,58 +30,58 @@ export default tseslint.config([
         },
       },
       globals: {
-        React: "writable",
+        React: 'writable',
       },
     },
     rules: {
-      "@typescript-eslint/array-type": [
-        "error",
+      '@typescript-eslint/array-type': [
+        'error',
         {
-          default: "array-simple",
+          default: 'array-simple',
         },
       ],
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-      "@typescript-eslint/no-unnecessary-condition": [
-        "error",
+      '@typescript-eslint/no-unnecessary-condition': [
+        'error',
         {
           allowConstantLoopConditions: true,
         },
       ],
-      "@typescript-eslint/no-non-null-assertion": "error",
+      '@typescript-eslint/no-non-null-assertion': 'error',
     },
-    "react/button-has-type": "error",
-    "react/hook-use-state": ["error", { allowDestructuredState: true }],
-    "react/jsx-curly-brace-presence": [
-      "error",
-      { props: "never", children: "never" },
+    'react/button-has-type': 'error',
+    'react/hook-use-state': ['error', { allowDestructuredState: true }],
+    'react/jsx-curly-brace-presence': [
+      'error',
+      { props: 'never', children: 'never' },
     ],
-    "react/jsx-handler-names": "error",
-    "react/jsx-sort-props": [
-      "warn",
+    'react/jsx-handler-names': 'error',
+    'react/jsx-sort-props': [
+      'warn',
       {
         callbacksLast: true,
         shorthandFirst: true,
-        multiline: "last",
+        multiline: 'last',
         reservedFirst: true,
       },
     ],
-    "react/prefer-stateless-function": "error",
-    "perfectionist/sort-array-includes": ["warn"],
-    "perfectionist/sort-exports": ["warn"],
-    "perfectionist/sort-named-exports": ["warn"],
-    "perfectionist/sort-named-imports": ["warn"],
-    "perfectionist/sort-interfaces": ["warn", { newlinesBetween: "never" }],
-    "perfectionist/sort-jsx-props": "off",
-    "perfectionist/sort-object-types": ["warn", { newlinesBetween: "never" }],
-    "perfectionist/sort-union-types": ["warn", { newlinesBetween: "never" }],
+    'react/prefer-stateless-function': 'error',
+    'perfectionist/sort-array-includes': ['warn'],
+    'perfectionist/sort-exports': ['warn'],
+    'perfectionist/sort-named-exports': ['warn'],
+    'perfectionist/sort-named-imports': ['warn'],
+    'perfectionist/sort-interfaces': ['warn', { newlinesBetween: 'never' }],
+    'perfectionist/sort-jsx-props': 'off',
+    'perfectionist/sort-object-types': ['warn', { newlinesBetween: 'never' }],
+    'perfectionist/sort-union-types': ['warn', { newlinesBetween: 'never' }],
     settings: {
       perfectionist: {
-        type: "natural",
+        type: 'natural',
         partitionByComment: true,
       },
     },
   },
-]);
+])

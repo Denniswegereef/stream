@@ -16,6 +16,8 @@ function App() {
     <>
       <Header />
       <Hero />
+
+      <div className="h-100"></div>
     </>
   )
 }

@@ -20,6 +20,14 @@
   font-family: 'AirbnbCereal';
   font-style: normal;
   font-display: swap;
+  font-weight: 600;
+  src: url('./assets/AirbnbCereal_W_Md.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-style: normal;
+  font-display: swap;
   font-weight: 700;
   src: url('./assets/AirbnbCereal_W_Bd.woff2') format('woff2');
 }
@@ -36,19 +44,22 @@
   --color-hof: #222222;
   --color-foggy: #6a6a6a;
   --color-bobo: #b0b0b0;
+  --color-deco: #dddddd;
+  --color-default-border: #ebebebcc;
 
-  --text-large: 56px;
+  /* Scale font from 2.5rem to 3.75 rem between 740px and 1120px (https://clamp.font-size.app/)*/
+  --text-large: clamp(2.5rem, 0rem + 6.6667vw, 3.75rem);
   --text-large--line-height: 1.11;
   --text-large--letter-spacing: -0.03em;
   --text-large--font-weight: var(--font-weight-bold);
 
-  --text-medium: clamp(2.5rem, 1.795vw + 2.174rem, 4.5rem);
+  --text-medium: 1rem;
   --text-medium--line-height: 1.2;
-  --text-medium--font-weight: var(--font-weight-medium);
+  --text-medium--font-weight: var(--font-weight-semibold);
 
-  --text-small: clamp(1.5rem, 1.093vw + 1.446rem, 2.5rem);
+  --text-small: 0.875rem;
   --text-small--line-height: 1.2;
-  --text-small--font-weight: var(--font-weight-normal);
+  --text-small--font-weight: var(--font-weight-medium);
 
   /* --input-background: linear-gradient(
     to var(--input_bgDirection),
@@ -59,14 +70,62 @@
       var(--input_progressPercentage),
     var(--input_backgroundEmptyColor, var(--linaria-theme_palette-bobo)) 0
   ); */
+
+  --header-height: 80px;
+
+  --breakpoint-md: 46rem;
+  --breakpoint-lg: 70rem;
+
+  --container-sm: 35rem;
+  --container-7xl: 90rem;
+
+  --rounded-4xl: 40px;
+
+  --blur-sm: 10px;
+
+  --shadow-sm: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
 @utility link-default {
   @apply underline;
 }
 
+@utility container-padding {
+  @apply px-6 md:px-10 lg:px-20;
+}
+
 @layer base {
+  html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     font-family: var(--font-family-body);
+  }
+
+  a,
+  button {
+    cursor: pointer;
+  }
+
+  /* Generic focus styles */
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [tabindex]:not([tabindex='-1']) {
+    @apply outline-2 outline-offset-2 outline-transparent;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:not([tabindex='-1']):focus-visible {
+    @apply outline-rounded-4xl outline-2 outline-offset-0 outline-black;
   }
 }
