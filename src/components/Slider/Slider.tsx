@@ -1,78 +1,132 @@
 import { Slider as SliderPrimitive } from 'radix-ui'
-import { useId } from 'react'
+import { useCallback, useId, useState } from 'react'
+import { CONTENT } from '../../data/content'
 import { cn } from '../../helpers/cn'
+import { interpolateString } from '../../helpers/interpolateString'
+import { normalizeNumber } from '../../helpers/normalizeNumber'
+import { useMeasure } from '../../hooks/useMeasure'
+
+const DEFAULT_VALUES = {
+  initialValue: 0,
+  min: 0,
+  max: 100,
+  step: 1,
+}
 
 interface SliderProps {
   className?: string
+  onValueChange?: (value: number) => void
+  onDragChange?: (isDragging: boolean) => void
+  initialValue?: number
+  min?: number
+  max?: number
+  step?: number
 }
 
-export const Slider = ({ className }: SliderProps) => {
+export const Slider = ({
+  className,
+  onValueChange,
+  onDragChange,
+  initialValue = DEFAULT_VALUES.initialValue,
+  min = DEFAULT_VALUES.min,
+  max = DEFAULT_VALUES.max,
+  step = DEFAULT_VALUES.step,
+}: SliderProps) => {
+  const [sliderRef, sliderBounds] = useMeasure()
+  const [tooltipRef, tooltipBounds] = useMeasure()
+
   const labelId = useId()
   const tooltipId = useId()
 
-  const onValueChange = (value: number[]) => {
-    console.log(value)
-  }
+  // Internal state
+  const [value, setValue] = useState(initialValue)
+  const [isDragging, setIsDragging] = useState(false)
+
+  const normalizedProgressPercentage = normalizeNumber(value, min, max)
+
+  // Handlers
+  const handleValueChange = useCallback(
+    (newValue: number[]) => {
+      const val = newValue[0]
+      setValue(val)
+
+      if (onValueChange) {
+        onValueChange(val)
+      }
+    },
+    [onValueChange]
+  )
+
+  const toggleDragging = useCallback(
+    (dragging: boolean) => {
+      setIsDragging(dragging)
+      if (onDragChange) {
+        onDragChange(dragging)
+      }
+    },
+    [onDragChange]
+  )
+
+  const handlePointerDown = useCallback(() => {
+    toggleDragging(true)
+  }, [toggleDragging])
+
+  const handlePointerUp = useCallback(() => {
+    toggleDragging(false)
+  }, [toggleDragging])
 
   return (
     <form className={cn('relative', className)}>
       <span id={labelId} aria-hidden="true" className="sr-only">
-        How many nights? 30 nights. Hosting 30 nights. Adjustable. Slide forward
-        to increase. Slide backward to decrease.
+        {interpolateString(CONTENT.slider.hiddenTitle, {
+          nights: `${max}`,
+        })}
       </span>
 
       <span
         id={tooltipId}
+        ref={tooltipRef}
         aria-hidden="true"
-        className="absolute top-0 left-0 translate-y-[-100%] bg-black"
+        style={{
+          transform: `translateX(${(sliderBounds.width - tooltipBounds.width) * normalizedProgressPercentage}px)`,
+        }}
+        className={cn(
+          'bg-hof text-medium pointer-events-none absolute bottom-0 left-0 -mt-8 mb-8 translate-y-[-35px] rounded-4xl px-6 py-3 text-white opacity-0 transition-opacity duration-150',
+          isDragging && 'pointer-events-auto opacity-100'
+        )}
+        tabIndex={isDragging ? 0 : -1}
       >
-        30 nights
+        {interpolateString(CONTENT.slider.tooltipLabel, {
+          nights: `${value}`,
+        })}
       </span>
 
       <SliderPrimitive.Root
-        onValueChange={onValueChange}
-        className="relative flex h-5 w-[200px] touch-none items-center select-none"
-        defaultValue={[30]}
-        max={100}
-        step={1}
+        ref={sliderRef}
+        onValueChange={handleValueChange}
+        className="relative flex h-[35px] w-[310px] touch-none items-center select-none md:w-[360px] lg:w-[305px]"
+        defaultValue={[initialValue]}
+        value={[value]}
+        min={min}
+        max={max}
+        step={step}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
       >
-        <SliderPrimitive.Track className="bg-hof relative h-[3px] grow rounded-full">
-          <SliderPrimitive.Range className="bg-primary absolute h-full rounded-full" />
+        <SliderPrimitive.Track
+          className={cn(
+            'bg-bebe rounded-1 transition-height relative h-1 grow rounded-full duration-150',
+            // Height transition unfortunately, because scale-y distorts the border radius
+            isDragging && 'h-3'
+          )}
+        >
+          <SliderPrimitive.Range className="from-primary to-primary-dark absolute h-full rounded-full bg-linear-to-r" />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
-          className="hover:bg-primary focus:shadow-blackA5 block size-5 rounded-[10px] bg-white shadow-[0_2px_10px] focus:shadow-[0_0_0_5px] focus:outline-none"
-          aria-label="Volume"
+          className="bg-faint block size-[35px] rounded-full shadow-[var(--shadow-thumb)] filter-[var(--filter-thumb)]"
+          aria-label={CONTENT.slider.thumb.ariaLabel}
         />
       </SliderPrimitive.Root>
     </form>
   )
 }
-
-// return (
-// <div>
-//   <span id={labelId} aria-hidden="true">
-//     How many nights? 30 nights. Hosting 30 nights. Adjustable. Slide forward
-//     to increase. Slide backward to decrease.
-//   </span>
-
-//   <span id={tooltipId} aria-hidden="true">
-//     30 nights
-//   </span>
-
-//   <div className="slider-container">
-//     <input
-//       className="slider-input"
-//       aria-valuetext="Hosting 30 nights"
-//       aria-valuenow={30}
-//       aria-label="How many nights? 30 nights. Hosting 30 nights. Adjustable. Slide forward to increase. Slide backward to decrease."
-//       aria-labelledby={labelId}
-//       aria-describedby={tooltipId}
-//       min="1"
-//       max="30"
-//       step="1"
-//       type="range"
-//       value="30"
-//     />
-//   </div>
-// </div>
-// )

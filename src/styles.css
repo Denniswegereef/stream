@@ -41,10 +41,14 @@
   --color-black: #000000;
   --color-white: #ffffff;
   --color-primary: #ff385c;
+  --color-primary-light: #e31c5f;
+  --color-primary-dark: #e61e4d;
   --color-hof: #222222;
   --color-foggy: #6a6a6a;
   --color-bobo: #b0b0b0;
   --color-deco: #dddddd;
+  --color-faint: #f7f7f7;
+  --color-bebe: #ebebeb;
   --color-default-border: #ebebebcc;
 
   /* Scale font from 2.5rem to 3.75 rem between 740px and 1120px (https://clamp.font-size.app/)*/
@@ -84,6 +88,11 @@
   --blur-sm: 10px;
 
   --shadow-sm: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+
+  /* Slider thumb styles */
+  --shadow-thumb: 0px 0px 0px 1px rgba(0, 0, 0, 0.02) 0px 2px 4px 0px
+    rgba(0, 0, 0, 0.16);
+  --filter-thumb: drop-shadow(3px 2px 3px rgba(0, 0, 0, 0.14));
 }
 
 @utility link-default {
@@ -126,6 +135,6 @@
   select:focus-visible,
   textarea:focus-visible,
   [tabindex]:not([tabindex='-1']):focus-visible {
-    @apply outline-rounded-4xl outline-2 outline-offset-0 outline-black;
+    @apply outline-2 outline-offset-0 outline-black;
   }
 }

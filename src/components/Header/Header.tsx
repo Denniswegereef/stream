@@ -8,7 +8,7 @@ export const Header = () => {
   const { y } = useScroll()
 
   return (
-    <header
+    <nav
       className={cn(
         'container-padding sticky top-0 z-50 mx-auto flex max-w-7xl items-center justify-between transition-[border-color] duration-300 md:border-b md:border-transparent md:bg-white/90 md:backdrop-blur-sm',
         y > 1 && 'md:border-default-border'
@@ -40,6 +40,6 @@ export const Header = () => {
           {CONTENT.header.button.text}
         </Link>
       </div>
-    </header>
+    </nav>
   )
 }
