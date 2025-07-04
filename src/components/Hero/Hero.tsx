@@ -14,7 +14,7 @@ const INITIAL_VALUE = 1
 export const Hero = () => {
   // Get a random value between on page load
   const randomValue = useMemo(() => {
-    return getRandomValue(100, 300, 1)
+    return getRandomValue(100, 300)
   }, [])
 
   const [currentValue, setCurrentValue] = useState(INITIAL_VALUE)
