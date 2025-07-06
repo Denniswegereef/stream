@@ -1,14 +1,17 @@
-import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { Navigation } from './components/Navigation'
 
 function App() {
   return (
     <>
-      <Header />
-      <Hero />
+      <Navigation />
 
-      {/* A dummy div for enabling scrolling */}
-      <div className="h-100"></div>
+      <main>
+        <Hero />
+
+        {/* A dummy div for enabling scrolling */}
+        <div className="h-screen"></div>
+      </main>
     </>
   )
 }

@@ -4,7 +4,7 @@ import { useScroll } from '../../hooks/useScroll'
 import { Logo } from '../../icons/Logo'
 import { Link } from '../../ui/Link'
 
-export const Header = () => {
+export const Navigation = () => {
   const { y } = useScroll()
 
   return (
@@ -24,7 +24,7 @@ export const Header = () => {
         <a
           href="/"
           // Increase click target size by using a pseudo-element
-          aria-label={CONTENT.header.logo.ariaLabel}
+          aria-label={CONTENT.navigation.logo.ariaLabel}
           className="relative before:absolute before:-inset-3 before:z-[1] before:content-['']"
         >
           <Logo className="text-primary" />
@@ -35,9 +35,9 @@ export const Header = () => {
         <Link
           variant="primary"
           className="w-full md:w-auto"
-          href={CONTENT.header.button.href}
+          href={CONTENT.navigation.button.href}
         >
-          {CONTENT.header.button.text}
+          {CONTENT.navigation.button.text}
         </Link>
       </div>
     </nav>

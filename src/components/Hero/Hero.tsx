@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { CONTENT } from '../../data/content'
 import { cn } from '../../helpers/cn'
+import { formatPrice } from '../../helpers/formatPrice'
 import { getRandomValue } from '../../helpers/getRandomValue'
 import { interpolateString } from '../../helpers/interpolateString'
-import { formatPrice } from '../../hooks/formatPrice'
 import { PropertySummaryButton } from '../../ui/PropertySummaryButton'
 import { EmbedMap } from '../EmbedMap/EmbedMap'
 import { Slider } from '../Slider/Slider'
@@ -13,9 +13,7 @@ const INITIAL_VALUE = 1
 
 export const Hero = () => {
   // Get a random value between on page load
-  const randomValue = useMemo(() => {
-    return getRandomValue(100, 300)
-  }, [])
+  const randomValue = useMemo(() => getRandomValue(100, 300), [])
 
   const [currentValue, setCurrentValue] = useState(INITIAL_VALUE)
   const [isDragging, setIsDragging] = useState(false)

@@ -1,5 +1,5 @@
 export const CONTENT = {
-  header: {
+  navigation: {
     logo: {
       ariaLabel: 'Go to home page',
     },

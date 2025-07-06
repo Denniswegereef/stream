@@ -1,6 +1,11 @@
 import { useCallback } from 'react'
 import { normalizeNumber } from '../helpers/normalizeNumber'
 
+/**
+ * Tracks mouse position within an element and sets CSS custom properties
+ * @param element - The element to track the mouse position within
+ * @returns An object with a handleMouseMove function
+ */
 export const useMousePosition = <T extends HTMLElement>(element: T) => {
   const handleMouseMove = useCallback(
     (event: React.MouseEvent<T>) => {

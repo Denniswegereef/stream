@@ -5,6 +5,9 @@ interface ScrollPosition {
   y: number
 }
 
+/**
+ * Tracks window scroll position
+ */
 export const useScroll = (): ScrollPosition => {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
     x: 0,

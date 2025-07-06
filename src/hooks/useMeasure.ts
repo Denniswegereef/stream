@@ -11,6 +11,9 @@ interface BoundingBox {
   right: number
 }
 
+/**
+ * Measures an element's bounding box and returns ref with bounds
+ */
 export function useMeasure<T extends HTMLElement = HTMLDivElement>(): [
   React.RefObject<T | null>,
   BoundingBox,
@@ -28,11 +31,11 @@ export function useMeasure<T extends HTMLElement = HTMLDivElement>(): [
   })
 
   useEffect(() => {
-    if (!ref.current) return
-
     const updateBounds = () => {
-      if (!ref.current) return
-      const rect = ref.current.getBoundingClientRect()
+      const rect = ref.current?.getBoundingClientRect()
+
+      if (!rect) return
+
       setBounds({
         x: rect.x,
         y: rect.y,

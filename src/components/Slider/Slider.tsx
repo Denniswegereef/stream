@@ -115,15 +115,15 @@ export const Slider = ({
       >
         <SliderPrimitive.Track
           className={cn(
-            'bg-bebe rounded-1 transition-height relative h-1 grow rounded-full duration-150',
+            'bg-bebe rounded-1 transition-height relative h-1 grow cursor-pointer rounded-full duration-150',
             // Height transition unfortunately, because scale-y distorts the border radius
             isDragging && 'h-3'
           )}
         >
-          <SliderPrimitive.Range className="from-primary to-primary-dark absolute h-full rounded-full bg-linear-to-r" />
+          <SliderPrimitive.Range className="from-primary to-primary-dark absolute h-full cursor-pointer rounded-full bg-linear-to-r" />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
-          className="bg-faint block size-[35px] rounded-full shadow-[var(--shadow-thumb)] filter-[var(--filter-thumb)]"
+          className="bg-faint block size-[35px] cursor-pointer rounded-full shadow-[var(--shadow-thumb)] filter-[var(--filter-thumb)]"
           aria-label={CONTENT.slider.thumb.ariaLabel}
         />
       </SliderPrimitive.Root>
